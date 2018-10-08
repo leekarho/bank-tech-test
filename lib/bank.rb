@@ -9,9 +9,9 @@ class Bank
   def credit(deposit)
     @balance += deposit
   end
-  #
-  # def debit(withdrawal)
-  #   @balance -= withdrawal
-  # end
+  
+  def debit(withdrawal)
+    @balance -= withdrawal
+  end
 
 end
