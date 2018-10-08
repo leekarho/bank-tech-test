@@ -3,6 +3,7 @@ require 'account'
 describe Account do
 
   subject(:account) { described_class.new }
+  let(:statement_klass)
 
   it 'increases balance when credit' do
     account.credit(1000)
@@ -25,6 +26,10 @@ describe Account do
     account.debit(25)
     expect(account.transaction_history.length).to eq 2
     expect(account.transaction_history.any? { |hash| hash[:credit] == 50 }).to be true
+  end
+
+  it 'returns the statement' do
+
   end
 
 end
