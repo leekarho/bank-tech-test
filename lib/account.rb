@@ -28,4 +28,9 @@ class Account
     Time.now.strftime("%d/%m/%Y")
   end
 
+  def view_statement(statement = Statement)
+    acc_statement = statement.new(@transaction_history)
+    acc_statement.view_statement
+  end
+
 end
