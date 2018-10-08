@@ -15,4 +15,10 @@ describe Bank do
     expect(bank.balance).to eq 750
   end
 
+  it 'cannot debit from account when balance is 0' do
+    bank = Bank.new
+    bank.credit(249)
+    expect {bank.debit(250)}.to raise_error 'Not enough funds in your account'
+  end
+
 end
