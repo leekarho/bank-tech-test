@@ -1,4 +1,5 @@
 class Account
+
   attr_reader :balance, :transaction_history
 
   def initialize
@@ -6,7 +7,7 @@ class Account
     @transaction_history = []
   end
 
-  def credit(deposit, date = transaction_date)
+  def credit(deposit, date = Statement.new.transaction_date)
     @balance += deposit
     @transaction_history << { date: date,
                               credit: deposit,
@@ -14,7 +15,7 @@ class Account
                               balance: @balance }
   end
 
-  def debit(withdrawal, date = transaction_date)
+  def debit(withdrawal, date = Statement.new.transaction_date)
     raise 'Not enough funds in your account' if overdrawn(withdrawal)
 
     @balance -= withdrawal
@@ -24,16 +25,11 @@ class Account
                               balance: @balance }
   end
 
-  def view_statement(statement_klass = Statement)
-    acc_statement = statement_klass.new(@transaction_history)
-    acc_statement.view_statement
+  def view_statement(acc_statement = Statement.new)
+    acc_statement.view_statement(@transaction_history)
   end
 
   private
-
-  def transaction_date
-    Time.now.strftime('%d/%m/%Y')
-  end
 
   def overdrawn(withdrawal)
     @balance < withdrawal

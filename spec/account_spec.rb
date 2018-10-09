@@ -2,8 +2,7 @@ require 'account'
 
 describe Account do
   subject(:account) { described_class.new }
-  let(:statement_klass) { double :statement_klass, new: mock_statement }
-  let(:mock_statement) { double :mock_statement, view_statement: 50 }
+  let(:statement_klass) { double :statement_klass }
 
   it 'increases balance when credit' do
     account.credit(1000)
@@ -29,7 +28,7 @@ describe Account do
   end
 
   it 'returns the statement' do
-    expect(mock_statement).to receive(:view_statement)
+    expect(statement_klass).to receive(:view_statement)
     account.view_statement(statement_klass)
   end
 end
