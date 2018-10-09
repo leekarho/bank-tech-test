@@ -1,5 +1,4 @@
 class Account
-
   attr_reader :balance, :transaction_history
 
   def initialize
@@ -17,6 +16,7 @@ class Account
 
   def debit(withdrawal, date = transaction_date)
     raise 'Not enough funds in your account' if overdrawn(withdrawal)
+
     @balance -= withdrawal
     @transaction_history << { date: date,
                               credit: nil,
@@ -32,11 +32,10 @@ class Account
   private
 
   def transaction_date
-    Time.now.strftime("%d/%m/%Y")
+    Time.now.strftime('%d/%m/%Y')
   end
 
   def overdrawn(withdrawal)
     @balance < withdrawal
   end
-  
 end
