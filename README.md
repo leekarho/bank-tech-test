@@ -11,3 +11,14 @@ As a bank customer,
 so that I can keep track of my spending,
 I would like to see the transaction history.
 ```
+
+Tech/Framework
+-----
+
+Written in Ruby and tested in Rspec
+
+How to use
+-----
+
+run irb in terminal: require './lib/account.rb'
+                     require './lib/statement.rb'
