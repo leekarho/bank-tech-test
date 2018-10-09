@@ -7,7 +7,7 @@ class Account
     @transaction_history = []
   end
 
-  def credit(deposit, date = Statement.new.transaction_date)
+  def credit(deposit, date = transaction_date)
     @balance += deposit
     @transaction_history << { date: date,
                               credit: deposit,
@@ -15,7 +15,7 @@ class Account
                               balance: @balance }
   end
 
-  def debit(withdrawal, date = Statement.new.transaction_date)
+  def debit(withdrawal, date = transaction_date)
     raise 'Not enough funds in your account' if overdrawn(withdrawal)
 
     @balance -= withdrawal
@@ -34,4 +34,9 @@ class Account
   def overdrawn(withdrawal)
     @balance < withdrawal
   end
+
+  def transaction_date
+    Time.now.strftime('%d/%m/%Y')
+  end
+
 end
